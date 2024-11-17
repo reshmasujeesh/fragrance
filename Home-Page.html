@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Font Awesome -->
+    <title>Perfume Website</title>
+    <style>
+        /* General Reset */
+   
+        * {
+            margin: 0;
+            
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif; /* Apply Poppins font to all text */
+            scrollbar-width: none;
+         overflow-x: hidden;
+   
+           
+        }
+
+        /* Body */
+        body {
+            scroll-behavior: smooth;
+            width: 100%;
+            min-height: 100vh;
+            background: #f8f8f8;
+        }
+
+        /* Header */
+        header {
+    height: 50px;
+    width: 100%;
+    color: rgb(255, 255, 255); /* Set color for text and icons */
+    display: flex;
+    background-color: rgba(126, 47, 27); /* Semi-transparent background */
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+
+.container {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Center content horizontally */
+    gap: 50px; /* Space between logo and nav links */
+}
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            font-size: 1px;
+            list-style: none;
+            gap: 20px;
+        }
+
+        /* Add animation to each link */
+        .nav-links li {
+            opacity: 0;
+            font-size: 12px;    
+            transform: translateY(-20px);
+            animation: fadeSlideIn 0.8s ease forwards;
+        }
+
+        /* Delay each link animation slightly for a staggered effect */
+        .nav-links li:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+
+        .nav-links li:nth-child(2) {
+            animation-delay: 0.7s;
+        }
+
+        .nav-links li:nth-child(3) {
+            animation-delay: 0.9s;
+        }
+
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+            font-size: 13px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            color: #f0c040;
+        }
+
+        /* Hero Section */
+        .hero {
+    width: 100%;
+   
+    pointer-events: auto;  /* Temporarily allow interaction */
+
+
+    height: 100vh;
+    background: url('images/logo5.jpg') center/cover no-repeat fixed;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    justify-content: center;
+    pointer-events: none; /* Disable interaction with the image */
+    position: relative;
+    animation: fadeInImage 1.5s ease-in-out;
+    user-select: none; /* Disable text selection */
+   
+}
+
+
+        .hero .overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInText 2s ease-out 1.5s;
+            position: relative;
+        }
+
+        /* Small Image Styling */
+        .hero .sub-image {
+            position: absolute;
+            right: 15%; /* Adjust position as needed */
+            top: 20%; /* Adjust position as needed */
+            width: 0px; /* Adjust size as needed */
+            height: auto;
+        }
+
+        @keyframes fadeInImage {
+            from {
+                opacity: 0;
+                transform: scale(1.7);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+                transform: translateY(0px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h2 {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        /* Call-to-Action Button */
+        .cta-button {
+            background-color: #ffffff;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15;
+            cursor: pointer;
+            border-radius: 200px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cta-button:hover {
+            background-color: #d4a530;
+            transform: scale(1.05);
+        }
+
+        /* Loader Styling */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        /* Spinner Animation */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #f0c040;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Fragrance Section */
+        .fragrance-section {
+          
+            padding: 50px 0;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .fragrance-list {
+            margin-top: 20;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .fragrance-item {
+            background: #f0f0f0;
+            width: 250px;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .fragrance-item:hover {
+            transform: scale(1.05);
+        }
+
+        .fragrance-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .fragrance-item h3 {
+            margin: 15px 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .fragrance-item p {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            color: #f0c040;
+            margin: 10px 0;
+        }
+
+        .add-to-cart {
+            background-color: #f0c040;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #d4a530;
+            transform: scale(1.05);
+
+        }
+        /* Continuous movement for the arrow */
+@keyframes moveArrow {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(5px); /* Move the arrow 10px to the right */
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.cta-button i {
+    animation: moveArrow 1s ease-in-out infinite; /* Apply continuous movement */
+}
+footer {
+            background-color: rgba(126, 47, 27, 0.8);
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        /* About Us Section */
+        .about-section {
+            padding: 60px 0;
+            background-color: #fafafa;
+            text-align: center;
+        }
+
+        .about-section h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .about-section .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-section .about-content img {
+            width: 400px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-section .about-text {
+            max-width: 500px;
+            text-align: left;
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        .contact-section {
+        padding: 60px 20px;
+        background-color: #f0f0f0;
+        text-align: center;
+    }
+
+    .contact-section h2 {
+        font-size: 2rem;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .contact-section p {
+        font-size: 1.1rem;
+        color: #666;
+        max-width: 900px;
+        margin: 0 auto 30px;
+    }
+
+    .contact-details {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 350px;
+        height: 150px;
+        text-align: left;
+        transition: transform 0.3s ease;
+    }
+
+    .contact-item:hover {
+        transform: scale(1.05);
+    }
+
+    .contact-item i {
+        font-size: 1.5rem;
+        color: #d4a530;
+    }
+
+    .contact-info h4 {
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    .contact-info p {
+        font-size: 1rem;
+        color: #777;
+        margin: 5px 0 0;
+    }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div id="logo1"class="logo">FRAGRANCES</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#hero"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#about-section"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="#contact-section"><i class="fas fa-envelope"></i> Contact</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="overlay">
+            <h2>Discover the Fragrance of Elegance</h2>
+          
+                <button class="cta-button">Explore Now <i class="fa fa-angle-double-right"></i></button>
+            
+            
+            <img src="images/subimage2.png" alt="Sub Image" class="sub-image"> <!-- Sub image element -->
+        </div>
+    </section>
+
+    <!-- Fragrance Section -->
+    <section id="fragrance-section" class="fragrance-section">
+        <h2>Explore Fragrances</h2>
+        <div class="fragrance-list">
+            <!-- Fragrance Item 1 -->
+            <div class="fragrance-item">
+                <img src="images/img1.jpg" alt="Fragrance 1" width="200" height="400">
+                <h3>Elegant Rose</h3>
+                <p>A timeless fragrance that blends rose with notes of vanilla and musk.</p>
+                <div class="price">$45.00</div>
+                <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            </div>
+            <!-- Fragrance Item 2 -->
+            <div class="fragrance-item">
+                <img src="images/img2.jpg" alt="Fragrance 2" width="200" height="400">
+                <h3>Ocean Breeze</h3>
+                <p>A fresh and invigorating scent, perfect for daytime wear.</p>
+                <div class="price">$40.00</div>
+                <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            </div>
+            <!-- Fragrance Item 3 -->
+            <div class="fragrance-item">
+                <img src="images/img3.jpg" alt="Fragrance 3" width="200" height="400">
+                <h3>Lavender Dream</h3>
+                <p>A soothing blend of lavender and jasmine for a relaxing experience.</p>
+                <div class="price">$50.00</div>
+                <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            </div>
+            <div class="fragrance-item">
+                <img src="images/img5.jpg" alt="Fragrance 3" width="200" height="400">
+                <h3>Lavender Dream</h3>
+                <p>A soothing blend of lavender and jasmine for a relaxing experience.</p>
+                <div class="price">$50.00</div>
+                <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            </div>
+            <div class="fragrance-list">
+                <!-- Fragrance Item 1 -->
+                <div class="fragrance-item">
+                    <img src="images/img1.jpg" alt="Fragrance 1" width="200" height="400">
+                    <h3>Elegant Rose</h3>
+                    <p>A timeless fragrance that blends rose with notes of vanilla and musk.</p>
+                    <div class="price">$45.00</div>
+                    <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+                <!-- Fragrance Item 2 -->
+                <div class="fragrance-item">
+                    <img src="images/img2.jpg" alt="Fragrance 2" width="200" height="400">
+                    <h3>Ocean Breeze</h3>
+                    <p>A fresh and invigorating scent, perfect for daytime wear.</p>
+                    <div class="price">$40.00</div>
+                    <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+                <!-- Fragrance Item 3 -->
+                <div class="fragrance-item">
+                    <img src="images/img3.jpg" alt="Fragrance 3" width="200" height="400">
+                    <h3>Lavender Dream</h3>
+                    <p>A soothing blend of lavender and jasmine for a relaxing experience.</p>
+                    <div class="price">$50.00</div>
+                    <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+                <div class="fragrance-item">
+                    <img src="images/img5.jpg" alt="Fragrance 3" width="200" height="400">
+                    <h3>Lavender Dream</h3>
+                    <p>A soothing blend of lavender and jasmine for a relaxing experience.</p>
+                    <div class="price">$50.00</div>
+                    <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+        </div>
+    </section>
+    <section class="about-section" id="about-section">
+        <h2>About Us</h2>
+        <div class="about-content">
+            <img src="images/about.jpg" alt="About Us Image">
+            <div class="about-text">
+                <p>At FRAGRANCES, we believe that every scent tells a story. Our journey began with a passion for elegance and sophistication, blending timeless scents with modern trends to create unique fragrances that resonate with each individual. Our team is dedicated to offering an exceptional selection of perfumes that suit every style and personality.</p>
+                <p>Our mission is to bring you high-quality fragrances that are crafted with care and precision. Whether you’re looking for a fresh daytime scent or a deep, alluring fragrance for the evening, we have something for everyone.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact-section" class="contact-section">
+        <h2>Contact Us</h2>
+        <p>We’d love to hear from you! Whether you have questions about our fragrances or need help with an order, our team is here to assist you. Reach out to us through any of the options below, and we’ll get back to you as soon as possible.</p>
+        
+        <div class="contact-details">
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <div class="contact-info">
+                    <h4>Phone</h4>
+                    <p>+1 (123) 456-7890</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <div class="contact-info">
+                    <h4>Email</h4>
+                    <p>contact@fragrances.com</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="contact-info">
+                    <h4>Address</h4>
+                    <p>123 Fragrance Ave, Aroma City, Perfume Land</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 FRAGRANCES. All Rights Reserved.</p>
+    </footer>
+    <!-- JavaScript to hide the loader after page loads -->
+    <script>
+       window.addEventListener("load", function() {
+            document.getElementById("loader").style.display = "none";
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        document.querySelector('.cta-button').addEventListener('click', function() {
+    console.log('Button clicked!');  // Log this to check if the button is clicked
+    document.getElementById('fragrance-section').scrollIntoView({
+        behavior: 'smooth'
+    });
+});
+
+
+
+
+    </script>
+</body>
+</html>
